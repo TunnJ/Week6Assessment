@@ -22,14 +22,14 @@ public class ListPlayerHelper {
 	
 	public List<Player> showAllPlayers(){
 		EntityManager em = emfactory.createEntityManager();
-		List<Player> allPlayers = em.createQuery("SELECT i FROM ListItem i").getResultList();
+		List<Player> allPlayers = em.createQuery("SELECT li FROM Player li").getResultList();
 		return allPlayers;
 	}
 	
 	public void deletePlayer(Player toDelete) {
 		EntityManager em = emfactory.createEntityManager();
 		em.getTransaction().begin();
-		TypedQuery<Player> typedQuery = em.createQuery("select li from ListItem li where li.team = :selectedTeam and li.name = :selectedName", Player.class);
+		TypedQuery<Player> typedQuery = em.createQuery("select li from Player li where li.team = :selectedTeam and li.name = :selectedName", Player.class);
 		
 		typedQuery.setParameter("selectedTeam", toDelete.getTeam());
 		typedQuery.setParameter("selectedName", toDelete.getName());

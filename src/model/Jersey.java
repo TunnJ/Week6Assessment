@@ -1,5 +1,6 @@
 package model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -20,13 +21,18 @@ public class Jersey {
 	private String color;
 	@Column(name="TYPE")
 	private String type;
-	@ManyToOne
+	@ManyToOne (cascade=CascadeType.PERSIST)
 	@JoinColumn(name="PLAYER_ID")
 	private Player player;
 	
 	public Jersey(String color, String type) {
 		this.color = color;
 		this.type = type;
+	}
+	public Jersey(String color, String type, Player player) {
+		this.color = color;
+		this.type = type;
+		this.player = player;
 	}
 	public Jersey() {
 		super();
@@ -49,6 +55,13 @@ public class Jersey {
 	public void setType(String type) {
 		this.type = type;
 	}
+	public Player getPlayer() {
+		return player;
+	}
+	public void setPlayer(Player player) {
+		this.player = player;
+	}
+
 	
 	@Override
 	public String toString() {
